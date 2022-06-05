@@ -1,7 +1,9 @@
+import React from "react";
 import "./App.css";
-import ExpenseItemContainer from "./Components/ExpenseItemContainer";
+import ExpenseItemContainer from "./Components/Expenses/ExpenseItemContainer";
 
-function App() {
+//function App() { 
+const App = () => { //Arrow function that have been implemented on ES6
 	const expense = [
 		{
 			id: "e1",
@@ -23,12 +25,21 @@ function App() {
 			date: new Date(2021, 5, 12),
 		},
 	];
-	return (
+	//Alternativ to JSX
+	//Sort off the same as Document.createElement from javascript.
+	return React.createElement(
+		"div",
+		{},
+		React.createElement("h2", {}, "Let's get started"),
+		React.createElement(ExpenseItemContainer, {data: expense})
+	);
+
+	/* 	return (
 		<div>
 			<h2>Let's get started</h2>
 			<ExpenseItemContainer data = {expense}></ExpenseItemContainer>
 		</div>
-	);
+	); */
 }
 
 export default App;
