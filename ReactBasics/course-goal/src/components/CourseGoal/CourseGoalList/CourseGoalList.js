@@ -9,11 +9,11 @@ const CourseGoalList = (props) => {
         props.onDelete(id)
     }
 	return (
-		<div>
+		<ul className="goal-list">
 			{props.goals.map((goal) => (
 				<CourseGoalItem value={goal.goal} key={goal.id} id={goal.id} onGoalDelete= {onDeleteHandler}></CourseGoalItem>
 			))}
-		</div>
+		</ul>
 	);
 };
 
