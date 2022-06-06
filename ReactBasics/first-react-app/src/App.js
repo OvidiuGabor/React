@@ -1,9 +1,12 @@
 import React from "react";
 import "./App.css";
 import ExpenseItemContainer from "./Components/Expenses/ExpenseItemContainer";
+import NewExpense from "./Components/NewExpense/NewExpense";
+import { useState } from "react";
 
 //function App() { 
 const App = () => { //Arrow function that have been implemented on ES6
+	
 	const expense = [
 		{
 			id: "e1",
@@ -27,19 +30,27 @@ const App = () => { //Arrow function that have been implemented on ES6
 	];
 	//Alternativ to JSX
 	//Sort off the same as Document.createElement from javascript.
-	return React.createElement(
+	const[newExpense, setNewExpense] = useState(expense)
+
+	const addExpenseHandler = (sentExpense) => {
+		expense.push(sentExpense)
+		console.log(expense)
+		setNewExpense(expense)
+	}
+
+/* 	return React.createElement(
 		"div",
 		{},
-		React.createElement("h2", {}, "Let's get started"),
+		React.createElement(NewExpense, {onExpenseSend: {addExpenseHandler}}),
 		React.createElement(ExpenseItemContainer, {data: expense})
-	);
-
-	/* 	return (
-		<div>
-			<h2>Let's get started</h2>
-			<ExpenseItemContainer data = {expense}></ExpenseItemContainer>
-		</div>
 	); */
+
+		return (
+		<div>
+			<NewExpense  onExpenseSend={addExpenseHandler}/>
+			<ExpenseItemContainer data = {newExpense}></ExpenseItemContainer>
+		</div>
+	);
 }
 
 export default App;
