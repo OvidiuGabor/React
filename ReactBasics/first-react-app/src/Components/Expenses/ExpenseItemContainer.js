@@ -1,42 +1,38 @@
 import React, { useState } from "react";
-import ExpenseItem from "./ExpenseItem";
+import ExpensesList from "./ExpensesList";
 import ExpenseFilter from "./ExpenseFilter";
 import "./ExpenseItemContainer.css";
 import Card from "../UI/Card";
+import ExpensesChart from "./ExpensesChart";
 
 function ExpenseItemContainer(props) {
-	const [selectedYear, setSelectedYear] = useState("2022");
+	const [selectedYear, setSelectedYear] = useState("2021");
+	/* const [expensesFilter, setExpensesFilter] = useState(props.data); */
 
 	const yearChangedHandler = (changedYear) => {
 		setSelectedYear(changedYear);
-		console.log(changedYear);
+		//console.log(changedYear);
+		/* 	setExpensesFilter(props.data);
+		setExpensesFilter((prev) => {
+			return prev.filter((el) => {
+				//console.log(el.date.getFullYear());
+				return el.date.getFullYear() == parseInt(changedYear);
+			});
+		}); */
 	};
+	const filteredExpenses = props.data.filter((expense) => {
+		return expense.date.getFullYear() === parseInt(selectedYear);
+	});
+
 	return (
-		<div className="expenses">
-			<ExpenseFilter  selected = {selectedYear} onYearChanged={yearChangedHandler}></ExpenseFilter>
-			<Card>
-				<ExpenseItem
-					title={props.data[0].title}
-					amount={props.data[0].amount}
-					date={props.data[0].date}
-				></ExpenseItem>
-				<ExpenseItem
-					title={props.data[1].title}
-					amount={props.data[1].amount}
-					date={props.data[1].date}
-				></ExpenseItem>
-				<ExpenseItem
-					title={props.data[2].title}
-					amount={props.data[2].amount}
-					date={props.data[2].date}
-				></ExpenseItem>
-				<ExpenseItem
-					title={props.data[3].title}
-					amount={props.data[3].amount}
-					date={props.data[3].date}
-				></ExpenseItem>
+			<Card className="expenses">
+				<ExpenseFilter
+					selected={selectedYear}
+					onYearChanged={yearChangedHandler}
+				></ExpenseFilter>
+				<ExpensesChart expenses = {filteredExpenses}></ExpensesChart>
+				<ExpensesList items={filteredExpenses}></ExpensesList>
 			</Card>
-		</div>
 	);
 }
 

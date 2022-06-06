@@ -5,7 +5,7 @@ const ExpenseFilter = (props) => {
 	//const [year, setYear] = useState("");
 	const yearChangeHandler = (event) => {
 		//setYear(event.target.value);
-		console.log(event);
+		//console.log(event);
         props.onYearChanged(event.target.value);
 	};
 
