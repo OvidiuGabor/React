@@ -1,25 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import { useState } from "react";
+import AddUser from "./components/Users/UserForm/AddUser";
+import UserList from "./components/Users/UsersList/UserLists";
+
+let PLACEHOLDER = [];
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+	const [users, setUsers] = useState(PLACEHOLDER);
+	//recive a obj of form {name: '', age: ''}
+	const addUserhandler = (user) => {
+    let updatedUser = {
+      ...user,
+      id: Math.random().toString()
+    }
+		setUsers((prev) => {
+			return [updatedUser, ...prev];
+		});
+	};
+
+	return (
+		<div>
+			<AddUser onAddUser={addUserhandler}></AddUser>
+			<UserList users={users}></UserList>
+		</div>
+	);
 }
 
 export default App;
