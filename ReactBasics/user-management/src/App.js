@@ -1,5 +1,5 @@
 import "./App.css";
-import { useState } from "react";
+import React, { useState } from "react";
 import AddUser from "./components/Users/UserForm/AddUser";
 import UserList from "./components/Users/UsersList/UserLists";
 
@@ -18,11 +18,13 @@ function App() {
 		});
 	};
 
+	//Another approach is to use <React.Fragment>, or simply <> as a wrapping element around your JSX code
+	//With this you can reduce the number of useless HTML elements that are rendered on the page
 	return (
-		<div>
+		<React.Fragment>
 			<AddUser onAddUser={addUserhandler}></AddUser>
 			<UserList users={users}></UserList>
-		</div>
+		</React.Fragment>
 	);
 }
 
